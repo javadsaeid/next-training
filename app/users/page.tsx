@@ -1,45 +1,20 @@
-import React from 'react'
+import React, { Suspense } from 'react';
+import UserTable from './UserTable';
+import Link from 'next/link';
 
-interface Geo  {
-  lat: string; 
-  lng: string;
-}
-interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo
-}
-interface User {
-    id: number;
-    name: string;
-    username: string;
-    email: string
-    address: Address
+interface Props {
+  searchParams: {sortOrder: string}
 }
 
-const Page = async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    const data: User[] = await res.json();
+const Page = async({searchParams: {sortOrder}}: Props) => {
+  // const { sortOrder = 'name' } = await searchParams;
   return (
     <>
-    <h1 className='text-2xl text-secondary font-bold'>User List</h1>
-      <table className='table table-bordered'>
-        <thead>
-          <tr className='text-xl text-purple-500'>
-            <th>name</th>
-            <th>email</th> 
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(r => <tr key={r.id}>
-            <td>{r.email}</td>
-            <td>{r.name}</td>
-          </tr>)}
-        </tbody>
-        
-      </table>
+      <h1>User List</h1>
+      <Link href="/users/new" className='btn'>New User</Link>
+      {/* <Suspense fallback={<p>Loading...</p>}> */}
+        <UserTable sortOrder={sortOrder}/>
+      {/* </Suspense> */}
     </>
   ) 
 }
