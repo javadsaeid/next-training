@@ -1,10 +1,9 @@
 import NextAuth, {NextAuthOptions} from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google'
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import {PrismaAdapter} from "@auth/prisma-adapter";
 import prisma from "@/prisma/client";
 import Credentials from "next-auth/providers/credentials"
 import bcrypt from "bcrypt";
-import {use} from "react";
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
@@ -16,13 +15,14 @@ export const authOptions: NextAuthOptions = {
         Credentials({
             name: 'Credentials',
             credentials: {
-                email: { label: "Email", type: 'email', placeholder: 'Email'},
-                password: {label: "Password", type: 'password', placeholder: 'enter you password'}
+                email: {label: "Email", type: 'email', placeholder: 'Email'},
+                password: {label: "Password", type: 'password', placeholder: 'enter your password'}
             },
             async authorize(credential, req) {
                 if (!credential?.email || !credential.email) {
                     return null
                 }
+
                 const user = await prisma.user.findUnique({where: {email: credential.email}})
                 if (!user) {
                     return null
@@ -43,4 +43,4 @@ export const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 
 
-export  {handler as GET, handler as POST }
+export {handler as GET, handler as POST}
