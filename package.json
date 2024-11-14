@@ -9,18 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.7.3",
     "@prisma/client": "^5.22.0",
     "@types/node": "22.9.0",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "autoprefixer": "10.4.20",
+    "bcrypt": "^5.1.1",
     "eslint": "9.14.0",
     "eslint-config-next": "15.0.2",
     "fast-sort": "^3.4.1",
     "next": "15.0.2",
     "next-auth": "^4.24.10",
     "postcss": "8.4.47",
-    "prisma": "^5.22.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwindcss": "3.4.14",
@@ -28,6 +29,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "daisyui": "^4.12.14"
+    "@types/bcrypt": "^5.0.2",
+    "daisyui": "^4.12.14",
+    "prisma": "^5.22.0"
   }
 }
